@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
   let maxClick = 'should be a state';
   let cnt = 'should be a state'; // tip: https://svelte.dev/docs/svelte/$state
   
@@ -7,14 +7,14 @@
     // tip: Since DOM (i.e., the webpage content) will automatically update based on values, [<p id="info">Remaining Number of Clicks: {cnt}</p>]
     // we only need to change the cnt number here. 
   }
-</script>
+</script> -->
 
 <h1>[Your Name]'s VIS Site</h1>
 <img
   width="200px"
   src="url to your favorite image"
 />
-<div>
+<!-- <div>
   You can click up to
   <select 
       bind:value={/*tip: bind the select action to change the maxClick value. https://svelte.dev/docs/svelte/bind#select-bind:value */} 
@@ -26,14 +26,14 @@
     {/each}
   </select>
   times
-</div>
-<button onclick={onClick}> Click Me </button>
+</div> -->
+<!-- <button onclick={onClick}> Click Me </button> -->
 
 <!-- tip: use {#if...} template syntax here (https://svelte.dev/docs/svelte/if) so that the content below will automatically update when cnt value changes -->
   <!-- `the content below should only show when cnt >0` -->
-  <p id="info">Remaining Number of Clicks: {cnt}</p>
+  <!-- <p id="info">Remaining Number of Clicks: {cnt}</p> -->
   <!-- The content below should only shown when cnt =0 -->
-  <p>No more clicks allowed</p>
+  <!-- <p>No more clicks allowed</p> -->
 
 
 <style>

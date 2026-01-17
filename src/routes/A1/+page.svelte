@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
     import * as d3 from "d3";
     import { onMount } from "svelte";
     import type { TMovie } from "../../types";
@@ -28,8 +28,8 @@
     // Call the loader when the component mounts
     onMount(loadCsv);
   </script>
-  
+   -->
   <h1>Summer Movies</h1>
   
-  <p>Here are {movies.length == 0 ? "..." : movies.length + " "} movies</p>
-  <Bar {movies} />
+  <!-- <p>Here are {movies.length == 0 ? "..." : movies.length + " "} movies</p> -->
+  <!-- <Bar {movies} /> -->
