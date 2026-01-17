@@ -52,14 +52,14 @@
 		finalProjectsLoading = true;
 		finalProjectsError = '';
 		try {
-			const data = await d3.csv('/final-projects.csv', (row) => {
+			const data = await d3.csv('./final-projects.csv', (row) => {
 				return {
 					id: row.id?.trim() ?? '',
 					title: row.title?.trim() ?? '',
 					members: row.members?.split(',').map((member) => member.trim()).filter(Boolean) ?? [],
 					link: row.link?.trim() ?? '',
 					semester: row.semester?.trim() ?? '',
-					teaser: "/teasers/" + row.id?.trim().split('-')[0] + "/" + row.id?.trim() + ".png"
+					teaser: "./teasers/" + row.id?.trim().split('-')[0] + "/" + row.id?.trim() + ".png"
 				} as FinalProject;
 			});
 			finalProjects = data.filter((project) => project.title);
@@ -140,7 +140,7 @@
 <main class="content">
 	<section class="hero" id="home">
 		<!-- <h1>CSCI 5609: Visualization</h1> -->
-		<img src="/cat.png" alt="Visualization" width="400px" style="margin-bottom: 16px; margin-top: 16px; border-radius: 10px;">
+		<img src="./cat.png" alt="Visualization" width="400px" style="margin-bottom: 16px; margin-top: 16px; border-radius: 10px;">
 		<!-- <p>
 			A hands-on course on visual data analysis, storytelling, and interactive
 			graphics.
