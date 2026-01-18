@@ -4,23 +4,28 @@
 
 	const menuItems = [
 		{
-			title: 'Canvas',
+			title: 'canvas',
 			href: 'https://canvas.umn.edu/courses/541245',
 			external: true
 		},
 		{
-			title: 'Staff', 
-			href: '#Staff',
+			title: 'staff', 
+			href: '#staff',
 			external: false
 		},
 		{
-			title: 'Assignments',
-			href: '#Assignments',
+			title: 'assignments',
+			href: '#assignments',
 			external: false
 		},
 		{
 			title: 'Final Project Gallery',
 			href: '#Gallery',
+			external: false
+		},
+		{
+			title: 'resources',
+			href: '#resources',
 			external: false
 		}
 	];
@@ -112,6 +117,95 @@
 		}
 	];
 
+	const datasets = [
+		{
+			name: 'Data Is Plural',
+			link: 'https://www.data-is-plural.com/',
+			des: 'A spreadsheet archive of public interest datasets curated by Jeremy Singer-Vine (with an accompanying newsletter).'
+		},
+		{
+			name: 'dataCommons.org',
+			link: 'https://datacommons.org/',
+			des: 'Aggregates and harmonizes global open data so you can ask questions with a knowledge graph.'
+		},
+		{
+			name: 'Civic Data Sets for the Pacific Northwest',
+			link: 'https://www.civicdata.io/',
+			des: 'A free open data platform built by Accela for government agencies and civic datasets.'
+		},
+		{
+			name: 'R Datasets Archive',
+			link: 'https://vincentarelbundock.github.io/Rdatasets/',
+			des: 'An archive of datasets distributed with the R statistical language.'
+		},
+		{
+			name: '30 Places to Find Open Data on the Web (Visual.ly)',
+			link: 'https://visual.ly/community/Infographics/education/30-places-find-open-data-web',
+			des: 'An infographic article listing 30 places to find open data on the web.'
+		},
+		{
+			name: 'Office for National Statistics (UK)',
+			link: 'https://www.ons.gov.uk/',
+			des: 'A repository of detailed statistics about Great Britain and Northern Ireland.'
+		},
+		{
+			name: 'World Bank Data Catalog',
+			link: 'https://datacatalog.worldbank.org/',
+			des: 'Find, download, and share World Bank development data.'
+		},
+		{
+			name: 'Machine Learning Repository',
+			link: 'https://archive.ics.uci.edu/',
+			des: 'Large variety of maintained datasets.'
+		},
+		{
+			name: 'TidyTuesday',
+			link: 'https://github.com/rfordatascience/tidytuesday',
+			des: 'A new dataset is shared every Tuesday since 2018.'
+		},
+		{
+			name: 'Data.gov Catalog',
+			link: 'https://catalog.data.gov/dataset/',
+			des: 'A comprehensive source for U.S. government open data.'
+		},
+		{
+			name: 'Kaggle',
+			link: 'https://www.kaggle.com/datasets',
+			des: 'Explore open datasets and machine learning projects.'
+		},
+		{
+			name: 'Human Mortality Database',
+			link: 'https://www.mortality.org/',
+			des: 'A rich resource for demographic and mortality data.'
+		},
+		{
+			name: 'BuzzFeedNews on GitHub',
+			link: 'https://github.com/BuzzFeedNews',
+			des: 'Open-source data, analysis, libraries, tools, and guides from BuzzFeed News.'
+		}
+	];
+
+
+	const toolkits = [
+    {
+      name: 'D3',
+      link: 'https://d3js.org/',
+	  examples: 'https://observablehq.com/@d3/gallery',
+	  des: 'JavaScript library for data-driven visualization and interaction.'
+    },
+	{
+		name: 'Vega', 
+		link: 'https://vega.github.io/vega/',
+		examples: 'https://vega.github.io/vega/examples/',
+		des: 'Declarative JSON grammar for building interactive visualizations.'
+	}, 
+	{
+		name: 'Vega-Lite', 
+		link: 'https://vega.github.io/vega-lite/',
+		examples: 'https://vega.github.io/editor/#/examples/vega-lite/circle_natural_disasters',
+		des: 'High-level declarative grammar for expressive charts.'
+	}
+  ]
 
 </script>
 
@@ -147,7 +241,7 @@
 		</p> -->
 	</section>
 
-	<section id="Staff" class="staff">
+	<section id="staff" class="staff">
 		<h2 class="staff-title">Staff</h2>
 		<div class="staff-grid">
 			<div class="staff-card">
@@ -165,7 +259,7 @@
 		</div>
 	</section>
 
-	<section class="assignments" id="Assignments">
+	<section class="assignments" id="assignments">
 		<h2>Assignments</h2>
 		Please refer to the following instructions and demos. All due dates are at midnight (CT).
 		{#each assignments as assignment}
@@ -223,6 +317,52 @@
 				{/each}
 			</div>
 		{/if}
+	</section>
+
+
+	<section class="resources" id="resources">
+		<h2>Resources</h2>
+		<h3>Toolkits</h3>
+		<ul class="resources-list">
+			{#each toolkits as toolkit}
+				<li>
+					<a href={toolkit.link} target="_blank" rel="noreferrer" class="demo-item">
+						{toolkit.name}
+					</a>
+					{#if toolkit.examples}
+						<a href={toolkit.examples} target="_blank" rel="noreferrer" class="link-item">
+							[Examples]
+						</a>
+					{/if}
+					{#if toolkit.des}
+						- {toolkit.des}
+					{/if}
+				</li>
+			{/each}
+		</ul>
+		<h3>Datasets</h3>
+		<ul class="resources-list">
+			{#each datasets as dataset}
+				<li>
+					<a href={dataset.link} target="_blank" rel="noreferrer" class="demo-item">
+						{dataset.name}
+					</a>
+					{#if dataset.des}
+						- {dataset.des}
+					{/if}
+				</li>
+			{/each}
+		</ul>
+		<h3>Color</h3>
+		<ul class="resources-list">
+		<li>
+			<a href='https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3' target="_blank" rel="noreferrer" class="link-item">
+			Color Brewer
+			</a>
+			- Color advice for cartograph
+		</li>
+	</ul>
+		
 	</section>
 
 
@@ -431,6 +571,18 @@
 
 	.error {
 		color: #b42318;
+	}
+
+	.resources {
+		max-width: 75%;
+		margin: 0 auto 100px;
+	}
+
+	.resources-list {
+		margin: 0;
+		padding-left: 20px;
+		display: grid;
+		gap: 8px;
 	}
 
 
