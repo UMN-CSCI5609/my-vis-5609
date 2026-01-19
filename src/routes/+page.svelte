@@ -248,7 +248,7 @@
 				<h3>Instructor</h3>
 				<p><b>Name</b>: <a class="staff-link" href="https://qianwen.info/" target="_blank" rel="noreferrer">Qianwen Wang</a></p>
 				<p><b>Email</b>: qianwen@umn.edu</p>
-				<p><b>Office Hour</b>: Thursday 10-11 am, Shepherd Labs 319</p>
+				<p><b>Office Hour</b>: Tuesday 12:00-1:00 pm, Shepherd Labs 319</p>
 			</div>
 			<div class="staff-card">
 				<h3>TA</h3>
