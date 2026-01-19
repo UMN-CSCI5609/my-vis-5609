@@ -88,7 +88,7 @@
 		},
 		{
 			title: 'A1 Visual Encoding',
-			instruction: 'https://github.com/UMN-CSCI5609/Assignments-Instructions/tree/main/A1-Visual-Encoding-1',
+			instruction: 'https://github.com/UMN-CSCI5609/Assignments-Instructions/tree/main/A1-Visual-Encoding',
 			demo: 'https://qianwen.info/my-vis-5609/A1',
 			due: 'Feb 16, 2026',
 			external: true
@@ -102,7 +102,7 @@
 		},
 		{
 			title: 'A3 3D Visualization',
-			instruction: 'https://github.com/UMN-CSCI5609/Assignments-Instructions/tree/a15e26beb7b417f3838887819c6bd61f94ecfe36/A3-3D',
+			instruction: 'https://github.com/UMN-CSCI5609/Assignments-Instructions/tree/main/A3-3D',
 			demo: 'https://qianwen.info/my-vis-5609/A3',
 			due: 'Mar 16, 2026',
 			external: true
@@ -110,7 +110,7 @@
 		},
 		{
 			title: 'A4 Scrollytelling',
-			instruction: 'https://github.com/UMN-CSCI5609/Assignments-Instructions/tree/a15e26beb7b417f3838887819c6bd61f94ecfe36/A4-Scrolly',
+			instruction: 'https://github.com/UMN-CSCI5609/Assignments-Instructions/tree/main/A4-Scrolly',
 			demo: 'https://qianwen.info/my-vis-5609/A4',
 			due: 'Mar 30, 2026',
 			external: true
