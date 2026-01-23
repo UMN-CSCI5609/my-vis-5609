@@ -261,10 +261,12 @@
 
 	<section class="assignments" id="assignments">
 		<h2>Assignments</h2>
-		Please refer to the following instructions and demos. All due dates are at midnight (CT).
+		Please refer to the following instructions and demos. 
+		<!-- All due dates are at midnight (CT). -->
 		{#each assignments as assignment}
 			<p><b>{assignment.title}</b>: 
-				<a href={assignment.instruction} target="_blank" rel="noreferrer" class="link-item">Instruction</a>, <a href={assignment.demo} target="_blank" rel="noreferrer" class="demo-item">Demo</a>, due: {assignment.due}</p>
+				<a href={assignment.instruction} target="_blank" rel="noreferrer" class="link-item">Instruction</a>, <a href={assignment.demo} target="_blank" rel="noreferrer" class="demo-item">Demo</a>. 			</p>
+				<!-- due: {assignment.due} -->
 		{/each}
 	</section>
 </main>
