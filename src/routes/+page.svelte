@@ -78,6 +78,12 @@
 
 	onMount(loadFinalProjects);
 
+	function copyToClipboard(text: string) {
+		if (navigator?.clipboard?.writeText) {
+			navigator.clipboard.writeText(text).catch((err) => console.warn('Copy failed', err));
+		}
+	}
+
 	const assignments = [
 		{
 			title: 'A0 Setup',
@@ -254,6 +260,14 @@
 				<h3>TA</h3>
 				<p><b>Name</b>: <a class="staff-link" href="https://ppphhhleo.github.io/" target="_blank" rel="noreferrer">Pan Hao</a></p>
 				<p><b>Email</b>: pan00342@umn.edu</p>
+				<p><b>Invite me to your assignment repo</b>: <span
+					class="copyable"
+					role="button"
+					tabindex="0"
+					on:click={() => copyToClipboard('@ppphhhleo')}
+					on:keydown={(e) => (e.key === 'Enter' || e.key === ' ') && copyToClipboard('@ppphhhleo')}
+					title="Click to copy"
+				>@ppphhhleo</span></p>
 				<p><b>Office Hour</b>: Wednesday 2:30-3:30 pm, Shepherd Labs 341</p>
 			</div>
 		</div>
@@ -305,6 +319,7 @@
 								src={project.teaser}
 								alt={`Teaser for ${project.title}`}
 								loading="lazy"
+								on:click={() => window.open(project.link, '_blank')}
 							/>
 						{/if}
 						<h2 class="project-title" 
@@ -526,6 +541,7 @@
 		display: inline-block;
 		transform-origin: left center;
 		transition: color 0.1s ease, transform 0.05s ease;
+		cursor: pointer;
 	}
 
 	.project-card:hover .project-title {
@@ -544,6 +560,21 @@
 	.staff-link {
 		color: inherit;
 		text-decoration: none;
+	}
+
+	.copyable {
+		cursor: pointer;
+		text-decoration: underline dotted;
+		text-decoration-thickness: 1px;
+	}
+
+	.copyable:hover {
+		color: goldenrod;
+	}
+
+	.copyable:focus {
+		outline: 2px solid goldenrod;
+		outline-offset: 2px;
 	}
 
 	.staff-link:hover {
