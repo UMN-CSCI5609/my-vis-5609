@@ -109,7 +109,7 @@
 		{
 			title: 'A3 3D Visualization',
 			instruction: 'https://github.com/UMN-CSCI5609/Assignments-Instructions/tree/main/A3-3D',
-			demo: 'https://qianwen.info/my-vis-5609/A3',
+			demo: 'https://ppphhhleo.github.io/vis-a0/A3',
 			due: 'Mar 16, 2026',
 			external: true
 
