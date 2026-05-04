@@ -37,6 +37,7 @@
 		link: string;
 		semester: string;
 		teaser?: string;
+		randomOrder: number;
 	};
 
 	let finalProjects: FinalProject[] = [];
@@ -44,14 +45,46 @@
 	let finalProjectsError = '';
 	let selectedSemester = 'All';
 
+	function parseSemester(semester: string) {
+		const match = semester.match(/^(Spring|Summer|Fall)(\d{4})$/i);
+		if (!match) return null;
+
+		const term = match[1];
+		const year = match[2];
+
+		return {
+			term,
+			year,
+			termClass: term.toLowerCase()
+		};
+	}
+
+	function compareSemesters(a: string, b: string) {
+		const termOrder: Record<string, number> = {
+			spring: 1,
+			summer: 2,
+			fall: 3
+		};
+		const parsedA = parseSemester(a);
+		const parsedB = parseSemester(b);
+
+		if (!parsedA || !parsedB) return a.localeCompare(b);
+		if (parsedA.year !== parsedB.year) return Number(parsedB.year) - Number(parsedA.year);
+
+		return termOrder[parsedB.termClass] - termOrder[parsedA.termClass];
+	}
+
 	$: semesters = [
 		'All',
-		...Array.from(new Set(finalProjects.map((project) => project.semester).filter(Boolean)))
+		...Array.from(new Set(finalProjects.map((project) => project.semester).filter(Boolean))).sort(
+			compareSemesters
+		)
 	];
 	$: filteredProjects =
-		selectedSemester === 'All'
+		[...(selectedSemester === 'All'
 			? finalProjects
-			: finalProjects.filter((project) => project.semester === selectedSemester);
+			: finalProjects.filter((project) => project.semester === selectedSemester))]
+			.sort((a, b) => a.randomOrder - b.randomOrder);
 
 	async function loadFinalProjects() {
 		finalProjectsLoading = true;
@@ -64,7 +97,8 @@
 					members: row.members?.split(',').map((member) => member.trim()).filter(Boolean) ?? [],
 					link: row.link?.trim() ?? '',
 					semester: row.semester?.trim() ?? '',
-					teaser: "./teasers/" + row.id?.trim().split('-')[0] + "/" + row.id?.trim() + ".png"
+					teaser: "./teasers/" + row.id?.trim().split('-')[0] + "/" + row.id?.trim() + ".png",
+					randomOrder: Math.random()
 				} as FinalProject;
 			});
 			finalProjects = data.filter((project) => project.title);
@@ -293,12 +327,20 @@
 			<!-- <span>Filter by semester</span> -->
 			<div class="semester-buttons" role="group" aria-label="Filter final projects by semester">
 				{#each semesters as semester}
+					{@const semesterParts = parseSemester(semester)}
 					<button
 						type="button"
 						class:active={selectedSemester === semester}
 						on:click={() => (selectedSemester = semester)}
 					>
-						{semester}
+						{#if semesterParts}
+							<span class="semester-year">{semesterParts.year}</span>
+							<span class={`semester-term term-${semesterParts.termClass}`}>
+								{semesterParts.term}
+							</span>
+						{:else}
+							<span class="semester-all">{semester}</span>
+						{/if}
 					</button>
 				{/each}
 			</div>
@@ -312,15 +354,26 @@
 		{:else}
 			<div class="project-grid">
 				{#each filteredProjects as project}
+					{@const projectSemester = parseSemester(project.semester)}
 					<article class="project-card">
+						{#if projectSemester}
+							<div
+								class={`project-semester-badge project-term-${projectSemester.termClass}`}
+								aria-label={project.semester}
+							>
+								{projectSemester.term} {projectSemester.year}
+							</div>
+						{/if}
 						{#if project.teaser}
-							<img
-								class="project-teaser"
-								src={project.teaser}
-								alt={`Teaser for ${project.title}`}
-								loading="lazy"
-								on:click={() => window.open(project.link, '_blank')}
-							/>
+							<div class="project-media">
+								<img
+									class="project-teaser"
+									src={project.teaser}
+									alt={`Teaser for ${project.title}`}
+									loading="lazy"
+									on:click={() => window.open(project.link, '_blank')}
+								/>
+							</div>
 						{/if}
 						<h2 class="project-title" 
 							on:click={() => window.open(project.link, '_blank')}
@@ -478,7 +531,7 @@
 	.semester-filter {
 		display: grid;
 		gap: 8px;
-		margin: 0 auto 12px;
+		margin: 0 auto 20px;
 		max-width: 90%;
 		font-weight: 600;
 	}
@@ -486,39 +539,104 @@
 	.semester-buttons {
 		display: flex;
 		flex-wrap: wrap;
+		justify-content: flex-start;
 		gap: 8px;
 	}
 
 	.semester-buttons button {
-		padding: 6px 12px;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 7px;
+		min-width: 92px;
+		min-height: 36px;
+		padding: 6px 10px;
 		border-radius: 999px;
-		border: 1px solid #d0d0d0;
-		background: #ffffff;
-		font-size: 0.9rem;
+		border: 1px solid #d7d7d7;
+		background: #fafafa;
+		color: #333333;
+		font-size: 0.88rem;
+		font-weight: 700;
 		cursor: pointer;
+		transition: border-color 0.12s ease, background 0.12s ease, color 0.12s ease,
+			box-shadow 0.12s ease;
+	}
+
+	.semester-buttons button:hover {
+		border-color: goldenrod;
+		background: #ffffff;
+	}
+
+	.semester-year,
+	.semester-all {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		line-height: 1;
+	}
+
+	.semester-all {
+		min-width: 42px;
+	}
+
+	.semester-term {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 22px;
+		padding: 3px 7px;
+		border-radius: 999px;
+		font-size: 0.76rem;
+		line-height: 1;
+	}
+
+	.term-spring {
+		background: #dff2de;
+		color: #276738;
+	}
+
+	.term-summer {
+		background: #fff0bf;
+		color: #7a5600;
+	}
+
+	.term-fall {
+		background: #f5dfc7;
+		color: #7a3d16;
 	}
 
 	.semester-buttons button.active {
 		background: maroon;
 		color: gold;
-		/* border-color: ; */
+		border-color: maroon;
+		box-shadow: 0 2px 8px rgba(128, 0, 0, 0.2);
+	}
+
+	.semester-buttons button.active .semester-term {
+		background: #fff8dc;
+		color: maroon;
 	}
 
 	.project-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
 		gap: 50px;
 		margin-top: 16px;
 		row-gap: 40px;
 	}
 
 	.project-card {
+		position: relative;
 		border: 1px solid #e5e5e5;
 		border-radius: 8px;
-		padding: 20px;
+		padding: 20px 20px 38px;
 		display: grid;
 		gap: 8px;
 		background: #ffffff;
+	}
+
+	.project-media {
+		position: relative;
 	}
 
 	.project-teaser {
@@ -548,6 +666,38 @@
 		color: #8ace00;
 		transform: scale(1.06);
 		/* text-decoration: underline; */
+	}
+
+	.project-semester-badge {
+		position: absolute;
+		right: 20px;
+		bottom: 10px;
+		z-index: 1;
+		width: fit-content;
+		padding: 2px 6px;
+		border: 1px solid #e5e5e5;
+		border-left-width: 3px;
+		border-radius: 4px;
+		background: #ffffff;
+		color: #555555;
+		font-size: 0.64rem;
+		font-weight: 700;
+		letter-spacing: 0.04em;
+		line-height: 1;
+		text-transform: uppercase;
+		white-space: nowrap;
+	}
+
+	.project-term-spring {
+		border-left-color: #6abf69;
+	}
+
+	.project-term-summer {
+		border-left-color: #d6a800;
+	}
+
+	.project-term-fall {
+		border-left-color: #c48a43;
 	}
 
 	.project-semester,
@@ -618,5 +768,56 @@
 		gap: 8px;
 	}
 
+	@media (max-width: 700px) {
+		.final-project {
+			max-width: 92%;
+			padding-bottom: 56px;
+		}
+
+		.semester-filter {
+			max-width: 100%;
+		}
+
+		.semester-buttons button {
+			min-width: 0;
+			min-height: 32px;
+			padding: 5px 8px;
+			font-size: 0.8rem;
+		}
+
+		.semester-term {
+			min-height: 20px;
+			padding: 3px 6px;
+			font-size: 0.7rem;
+		}
+
+		.project-grid {
+			gap: 22px;
+			row-gap: 24px;
+		}
+
+		.project-card {
+			padding: 14px 14px 34px;
+		}
+
+		.project-teaser {
+			height: 170px;
+		}
+
+		.project-title {
+			font-size: 0.98rem;
+		}
+
+		.project-members {
+			font-size: 0.88rem;
+		}
+
+		.project-semester-badge {
+			right: 14px;
+			bottom: 9px;
+			padding: 3px 6px;
+			font-size: 0.6rem;
+		}
+	}
 
 </style>
