@@ -121,38 +121,38 @@
 	const assignments = [
 		{
 			title: 'A0 Setup',
-			instruction: 'https://github.com/UMN-CSCI5609/Assignments-Instructions/tree/main/A0-Setup',
+			instruction: null,
 			demo: 'https://qianwen.info/my-vis-5609/A0',
-			due: 'Feb 2, 2026',
+			due: 'Sep 20, 2026',
 			external: true
 		},
 		{
 			title: 'A1 Visual Encoding',
-			instruction: 'https://github.com/UMN-CSCI5609/Assignments-Instructions/tree/main/A1-Visual-Encoding',
+			instruction: null,
 			demo: 'https://qianwen.info/my-vis-5609/A1',
-			due: 'Feb 16, 2026',
+			due: 'Oct 4, 2026',
 			external: true
 		},
 		{
 			title: 'A2 Interactive Analysis',
-			instruction: 'https://github.com/UMN-CSCI5609/Assignments-Instructions/tree/main/A2-Analysis',
+			instruction: null,
 			demo: 'https://qianwen.info/my-vis-5609/A2',
-			due: 'Mar 2, 2026',
+			due: 'Oct 25, 2026',
 			external: true
 		},
 		{
 			title: 'A3 3D Visualization',
-			instruction: 'https://github.com/UMN-CSCI5609/Assignments-Instructions/tree/main/A3-3D',
+			instruction: null,
 			demo: 'https://ppphhhleo.github.io/vis-a0/A3',
-			due: 'Mar 16, 2026',
+			due: 'Nov 8, 2026',
 			external: true
-
 		},
 		{
-			title: 'A4 Scrollytelling',
-			instruction: 'https://github.com/UMN-CSCI5609/Assignments-Instructions/tree/main/A4-Scrolly',
+			title: 'Scrollytelling',
+			instruction: null,
 			demo: 'https://qianwen.info/my-vis-5609/A4',
-			due: 'Mar 30, 2026',
+			due: null,
+			note: 'Not a separate assignment this semester \u2014 this is the template for the final project.',
 			external: true
 		}
 	];
@@ -288,21 +288,13 @@
 				<h3>Instructor</h3>
 				<p><b>Name</b>: <a class="staff-link" href="https://qianwen.info/" target="_blank" rel="noreferrer">Qianwen Wang</a></p>
 				<p><b>Email</b>: qianwen@umn.edu</p>
-				<p><b>Office Hour</b>: Tuesday 12:00-1:00 pm, Shepherd Labs 319</p>
+				<p><b>Office Hour</b>: TBD</p>
 			</div>
 			<div class="staff-card">
 				<h3>TA</h3>
-				<p><b>Name</b>: <a class="staff-link" href="https://ppphhhleo.github.io/" target="_blank" rel="noreferrer">Pan Hao</a></p>
-				<p><b>Email</b>: pan00342@umn.edu</p>
-				<p><b>Invite me to your assignment repo</b>: <span
-					class="copyable"
-					role="button"
-					tabindex="0"
-					on:click={() => copyToClipboard('@ppphhhleo')}
-					on:keydown={(e) => (e.key === 'Enter' || e.key === ' ') && copyToClipboard('@ppphhhleo')}
-					title="Click to copy"
-				>@ppphhhleo</span></p>
-				<p><b>Office Hour</b>: Wednesday 2:30-3:30 pm, Shepherd Labs 341</p>
+				<p><b>Name</b>: Marko Krstulovic</p>
+				<p><b>Email</b>: krstu002@umn.edu</p>
+				<p><b>Office Hour</b>: TBD</p>
 			</div>
 		</div>
 	</section>
@@ -313,7 +305,14 @@
 		<!-- All due dates are at midnight (CT). -->
 		{#each assignments as assignment}
 			<p><b>{assignment.title}</b>: 
-				<a href={assignment.instruction} target="_blank" rel="noreferrer" class="link-item">Instruction</a>, <a href={assignment.demo} target="_blank" rel="noreferrer" class="demo-item">Demo</a>. 			</p>
+				{#if assignment.instruction}
+					<a href={assignment.instruction} target="_blank" rel="noreferrer" class="link-item">Instruction</a>,
+				{:else}
+					<span class="link-item pending">Instruction to be added</span>,
+				{/if}
+				<a href={assignment.demo} target="_blank" rel="noreferrer" class="demo-item">Demo</a>.
+				{#if assignment.note}<span class="note">{assignment.note}</span>{/if}
+			</p>
 				<!-- due: {assignment.due} -->
 		{/each}
 	</section>
@@ -820,4 +819,14 @@
 		}
 	}
 
+
+	.pending {
+		color: #888;
+		font-style: italic;
+	}
+
+	.note {
+		color: #666;
+		font-style: italic;
+	}
 </style>
