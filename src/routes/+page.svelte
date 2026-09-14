@@ -121,7 +121,7 @@
 	const assignments = [
 		{
 			title: 'A0 Setup',
-			instruction: null,
+			instruction: 'https://github.com/UMN-CSCI5609/Assignments-Instructions/tree/main/A0-Setup',
 			demo: 'https://qianwen.info/my-vis-5609/A0',
 			due: 'Sep 20, 2026',
 			external: true
@@ -288,13 +288,13 @@
 				<h3>Instructor</h3>
 				<p><b>Name</b>: <a class="staff-link" href="https://qianwen.info/" target="_blank" rel="noreferrer">Qianwen Wang</a></p>
 				<p><b>Email</b>: qianwen@umn.edu</p>
-				<p><b>Office Hour</b>: TBD</p>
+				<p><b>Office Hour</b>: Monday 11:00 am-12:00 pm, Shepherd Labs 319</p>
 			</div>
 			<div class="staff-card">
 				<h3>TA</h3>
 				<p><b>Name</b>: Marko Krstulovic</p>
 				<p><b>Email</b>: krstu002@umn.edu</p>
-				<p><b>Office Hour</b>: TBD</p>
+				<p><b>Office Hour</b>: Wednesday 2:00-3:00 pm, Keller 1-201 Table #2</p>
 			</div>
 		</div>
 	</section>
