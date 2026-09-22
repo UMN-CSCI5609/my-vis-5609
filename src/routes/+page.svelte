@@ -128,7 +128,7 @@
 		},
 		{
 			title: 'A1 Visual Encoding',
-			instruction: null,
+			instruction: 'https://github.com/UMN-CSCI5609/Assignments-Instructions/tree/main/A1-Visual-Encoding',
 			demo: 'https://qianwen.info/my-vis-5609/A1',
 			due: 'Oct 4, 2026',
 			external: true
