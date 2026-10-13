@@ -135,7 +135,7 @@
 		},
 		{
 			title: 'A2 Interactive Analysis',
-			instruction: null,
+			instruction: 'https://github.com/UMN-CSCI5609/Assignments-Instructions/tree/main/A2-Analysis',
 			demo: 'https://qianwen.info/my-vis-5609/A2',
 			due: 'Oct 25, 2026',
 			external: true
